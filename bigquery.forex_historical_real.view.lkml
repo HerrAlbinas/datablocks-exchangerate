@@ -161,7 +161,7 @@ from
   }
 
   measure: eurcad {
-    label: "EUR/XAD"
+    label: "EUR/CAD"
     description: "1 Euro = X Canadian Dollars"
     value_format_name: decimal_4
     type:  max
