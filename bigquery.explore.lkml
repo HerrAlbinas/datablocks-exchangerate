@@ -6,8 +6,14 @@ datagroup: default {
   sql_trigger: select count(*) from `looker-datablocks.exchangerate.forex_real` ;;
 }
 
+# explore: forex {
+#   from: bq_forex_historical_real {}
+#   persist_with: default
+#   label: "Exchange Rates"
+# }
+
 explore: forex {
-  from: bq_forex_historical_real {}
+  from: bq_forex_real {}
   persist_with: default
   label: "Exchange Rates"
 }
