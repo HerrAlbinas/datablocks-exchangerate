@@ -31,7 +31,47 @@ view: bq_forex_historical_real {
     (case when lag(x.EUR_MXN, 1) over (order by x.day) is null then
       lag(x.EUR_MXN, 2) over (order by x.day)
       Else lag(x.EUR_MXN, 1) over (order by x.day) End)
-    Else x.EUR_MXN End) as EUR_MXN
+    Else x.EUR_MXN End) as EUR_MXN,
+(case when x.EUR_HUF is null then
+    (case when lag(x.EUR_HUF, 1) over (order by x.day) is null then
+      lag(x.EUR_HUF, 2) over (order by x.day)
+      Else lag(x.EUR_HUF, 1) over (order by x.day) End)
+    Else x.EUR_HUF End) as EUR_HUF,
+(case when x.EUR_CZK is null then
+    (case when lag(x.EUR_CZK, 1) over (order by x.day) is null then
+      lag(x.EUR_CZK, 2) over (order by x.day)
+      Else lag(x.EUR_CZK, 1) over (order by x.day) End)
+    Else x.EUR_CZK End) as EUR_CZK,
+(case when x.EUR_SEK is null then
+    (case when lag(x.EUR_SEK, 1) over (order by x.day) is null then
+      lag(x.EUR_SEK, 2) over (order by x.day)
+      Else lag(x.EUR_SEK, 1) over (order by x.day) End)
+    Else x.EUR_SEK End) as EUR_SEK,
+(case when x.EUR_DKK is null then
+    (case when lag(x.EUR_DKK, 1) over (order by x.day) is null then
+      lag(x.EUR_DKK, 2) over (order by x.day)
+      Else lag(x.EUR_DKK, 1) over (order by x.day) End)
+    Else x.EUR_DKK End) as EUR_DKK,
+(case when x.EUR_NOK is null then
+    (case when lag(x.EUR_NOK, 1) over (order by x.day) is null then
+      lag(x.EUR_NOK, 2) over (order by x.day)
+      Else lag(x.EUR_NOK, 1) over (order by x.day) End)
+    Else x.EUR_NOK End) as EUR_NOK,
+(case when x.EUR_DKK is null then
+    (case when lag(x.EUR_RUB, 1) over (order by x.day) is null then
+      lag(x.EUR_RUB, 2) over (order by x.day)
+      Else lag(x.EUR_RUB, 1) over (order by x.day) End)
+    Else x.EUR_RUB End) as EUR_RUB,
+(case when x.EUR_PLN is null then
+    (case when lag(x.EUR_PLN, 1) over (order by x.day) is null then
+      lag(x.EUR_PLN, 2) over (order by x.day)
+      Else lag(x.EUR_PLN, 1) over (order by x.day) End)
+    Else x.EUR_PLN End) as EUR_PLN,
+(case when x.EUR_JPY is null then
+    (case when lag(x.EUR_JPY, 1) over (order by x.day) is null then
+      lag(x.EUR_JPY, 2) over (order by x.day)
+      Else lag(x.EUR_JPY, 1) over (order by x.day) End)
+    Else x.EUR_JPY End) as EUR_JPY
 
 from
 (WITH
@@ -52,14 +92,24 @@ from
       left join (
       SELECT
         cast(forex_real.exchange_date as timestamp) AS forex_exchange_date,
+        1 as EUR,
         forex_real.USD  AS EUR_USD,
         forex_real.NZD AS EUR_NZD,
         forex_real.GBP AS EUR_GBP,
         forex_real.AUD AS EUR_AUD,
         forex_real.MXN AS EUR_MXN,
-        forex_real.CAD AS EUR_CAD
+        forex_real.CAD AS EUR_CAD,
+        forex_real.HUF AS EUR_HUF,
+        forex_real.CZK AS EUR_CZK,
+        forex_real.SEK as EUR_SEK,
+        forex_real.DKK as EUR_DKK,
+        forex_real.NOK as EUR_NOK,
+        forex_real.RUB as EUR_RUB,
+        forex_real.PLN as EUR_PLN,
+        forex_real.JPY as EUR_JPY
+
       FROM `looker-datablocks.exchangerate.forex_real_full`  AS forex_real
-      Group by 1,2,3,4,5,6,7
+      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
     order by day desc)
@@ -75,6 +125,24 @@ UNION ALL
   select day, EUR_MXN as rate, "MXN" as currency from currency_table
 UNION ALL
   select day, EUR_CAD as rate, "CAD" as currency from currency_table
+UNION ALL
+  select day, EUR_HUF as rate, "HUF" as currency from currency_table
+UNION ALL
+  select day, EUR_CZK as rate, "CZK" as currency from currency_table
+UNION ALL
+  select day, EUR_SEK as rate, "SEK" as currency from currency_table
+UNION ALL
+  select day, EUR_DKK as rate, "DKK" as currency from currency_table
+UNION ALL
+  select day, EUR_NOK as rate, "NOK" as currency from currency_table
+UNION ALL
+  select day, EUR_RUB as rate, "RUB" as currency from currency_table
+UNION ALL
+  select day, EUR_PLN as rate, "PLN" as currency from currency_table
+UNION ALL
+  select day, EUR_JPY as rate, "JPY" as currency from currency_table
+
+
   order by day desc ;;
     datagroup_trigger: 24hours
   }
