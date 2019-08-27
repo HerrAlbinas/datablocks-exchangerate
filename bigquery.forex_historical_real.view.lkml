@@ -64,17 +64,17 @@ from
     on forex.forex_exchange_date = calendar_day.day) as x
     order by day desc)
 
-    select day, EUR_USD as rate, "usd" as currency from currency_table
+    select day, EUR_USD as rate, "USD" as currency from currency_table
 UNION ALL
-  select day, EUR_NZD as rate, "nzd" as currency from currency_table
+  select day, EUR_NZD as rate, "NZD" as currency from currency_table
 UNION ALL
-  select day, EUR_GBP as rate, "gbp" as currency from currency_table
+  select day, EUR_GBP as rate, "GBP" as currency from currency_table
 UNION ALL
-  select day, EUR_AUD as rate, "aud" as currency from currency_table
+  select day, EUR_AUD as rate, "AUD" as currency from currency_table
 UNION ALL
-  select day, EUR_MXN as rate, "mxn" as currency from currency_table
+  select day, EUR_MXN as rate, "MXN" as currency from currency_table
 UNION ALL
-  select day, EUR_CAD as rate, "cad" as currency from currency_table
+  select day, EUR_CAD as rate, "CAD" as currency from currency_table
   order by day desc ;;
     datagroup_trigger: 24hours
   }
