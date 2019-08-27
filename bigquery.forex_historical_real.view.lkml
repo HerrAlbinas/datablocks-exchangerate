@@ -1,6 +1,7 @@
 view: bq_forex_historical_real {
   derived_table: {
-    sql: select x.day
+    sql: with currency_table as
+(select x.day
 , (case when x.EUR_USD is null then
     (case when lag(x.EUR_USD, 1) over (order by x.day) is null then
       lag(x.EUR_USD, 2) over (order by x.day)
@@ -61,8 +62,20 @@ from
       Group by 1,2,3,4,5,6,7
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
-    order by day desc
-       ;;
+    order by day desc)
+
+    select day, EUR_USD as rate, "usd" as currency from currency_table
+UNION ALL
+  select day, EUR_NZD as rate, "nzd" as currency from currency_table
+UNION ALL
+  select day, EUR_GBP as rate, "gbp" as currency from currency_table
+UNION ALL
+  select day, EUR_AUD as rate, "aud" as currency from currency_table
+UNION ALL
+  select day, EUR_MXN as rate, "mxn" as currency from currency_table
+UNION ALL
+  select day, EUR_CAD as rate, "cad" as currency from currency_table
+  order by day desc ;;
     datagroup_trigger: default
   }
 
@@ -73,105 +86,31 @@ from
   }
 
 
-  dimension: eur_usd {
-    label: "EUR/USD"
-    description: "1 Euro = X US Dollars"
+  dimension: rate {
+    label: "ExchangeRate"
+    description: "1 Euro = X units"
     value_format_name: decimal_4
     type:  number
-    sql: ${TABLE}.EUR_USD ;;
+    sql: ${TABLE}.rate ;;
     hidden: yes
   }
 
-  dimension: eur_nzd {
-    label: "EUR/NZD"
-    description: "1 Euro = X New Zealand Dollars"
-    value_format_name: decimal_4
-    type:  number
-    sql: ${TABLE}.EUR_NZD ;;
-    hidden: yes
+  dimension: currency {
+    label: "CurrencyCode"
+    description: "Currency Code"
+    type:  string
+    sql: ${TABLE}.currency ;;
   }
 
-  dimension: eur_aud {
-    label: "EUR/AUD"
-    description: "1 Euro = X Australian Dollars"
-    value_format_name: decimal_4
-    type:  number
-    sql: ${TABLE}.EUR_AUD ;;
-    hidden: yes
-  }
-
-  dimension: eur_mxn {
-    label: "EUR/MXN"
-    description: "1 Euro = X Mexican Pesos"
-    value_format_name: decimal_4
-    type:  number
-    sql: ${TABLE}.EUR_MXN ;;
-    hidden: yes
-  }
-
-  dimension: eur_cad {
-    label: "EUR/XAD"
-    description: "1 Euro = X Canadian Dollars"
-    value_format_name: decimal_4
-    type:  number
-    sql: ${TABLE}.EUR_JPY ;;
-    hidden: yes
-  }
-
-  dimension: eur_gbp {
-    label: "EUR/GBP"
-    description: "1 Euro = X Great Britain Pounds"
-    type:  number
-    sql: ${TABLE}.EUR_GBP ;;
-    hidden: yes
-  }
 
   ################################### measures to plot on graph ###################################
 
-  measure: eurusd {
-    label: "EUR/USD"
-    description: "1 Euro = X US Dollars"
+  measure: exchrate {
+    label: "ExchangeRate"
+    description: "1 Euro = X units"
     value_format_name: decimal_4
     type:  max
-    sql: ${TABLE}.EUR_USD ;;
+    sql: ${TABLE}.rate ;;
   }
 
-  measure: eurnzd {
-    label: "EUR/NZD"
-    description: "1 Euro = X New Zealand Dollars"
-    value_format_name: decimal_4
-    type:  max
-    sql: ${TABLE}.EUR_NZD ;;
-  }
-
-  measure: euraud {
-    label: "EUR/AUD"
-    description: "1 Euro = X Australian Dollars"
-    value_format_name: decimal_4
-    type:  max
-    sql: ${TABLE}.EUR_AUD ;;
-  }
-
-  measure: eurmxn {
-    label: "EUR/MXN"
-    description: "1 Euro = X Mexican Pesos"
-    value_format_name: decimal_4
-    type:  max
-    sql: ${TABLE}.EUR_MXN ;;
-  }
-
-  measure: eurcad {
-    label: "EUR/CAD"
-    description: "1 Euro = X Canadian Dollars"
-    value_format_name: decimal_4
-    type:  max
-    sql: ${TABLE}.EUR_JPY ;;
-  }
-
-  measure: eurgbp {
-    label: "EUR/GBP"
-    description: "1 Euro = X Great Britain Pounds"
-    type:  max
-    sql: ${TABLE}.EUR_GBP ;;
-  }
 }
