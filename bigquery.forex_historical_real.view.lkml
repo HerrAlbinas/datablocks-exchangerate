@@ -85,7 +85,6 @@ UNION ALL
     sql: ${TABLE}.day ;;
   }
 
-
   dimension: rate {
     label: "ExchangeRate"
     description: "1 Euro = X units"
