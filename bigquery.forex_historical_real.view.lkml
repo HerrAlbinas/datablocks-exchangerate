@@ -76,7 +76,7 @@ UNION ALL
 UNION ALL
   select day, EUR_CAD as rate, "cad" as currency from currency_table
   order by day desc ;;
-    datagroup_trigger: default
+    datagroup_trigger: 24hours
   }
 
   dimension_group: forex_exchange {
