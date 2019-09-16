@@ -81,7 +81,22 @@ view: bq_forex_historical_real {
     (case when lag(x.EUR_COP, 1) over (order by x.day) is null then
       lag(x.EUR_COP, 2) over (order by x.day)
       Else lag(x.EUR_COP, 1) over (order by x.day) End)
-    Else x.EUR_COP End) as EUR_COP
+    Else x.EUR_COP End) as EUR_COP,
+(case when x.EUR_KRW is null then
+    (case when lag(x.EUR_KRW, 1) over (order by x.day) is null then
+      lag(x.KRW, 2) over (order by x.day)
+      Else lag(x.KRW, 1) over (order by x.day) End)
+    Else x.EUR_KRW End) as EUR_KRW,
+(case when x.EUR_ARS is null then
+    (case when lag(x.EUR_ARS, 1) over (order by x.day) is null then
+      lag(x.EUR_ARS, 2) over (order by x.day)
+      Else lag(x.EUR_ARS, 1) over (order by x.day) End)
+    Else x.EUR_ARS End) as EUR_ARS,
+(case when x.EUR_BRL is null then
+    (case when lag(x.EUR_BRL, 1) over (order by x.day) is null then
+      lag(x.EUR_BRL, 2) over (order by x.day)
+      Else lag(x.EUR_BRL, 1) over (order by x.day) End)
+    Else x.EUR_BRL End) as EUR_BRL
 
 from
 (WITH
@@ -118,10 +133,13 @@ from
         forex_real.PLN as EUR_PLN,
         forex_real.JPY as EUR_JPY,
         forex_real.BYN as EUR_BYN,
-        forex_real.COP as EUR_COP
+        forex_real.COP as EUR_COP,
+        forex_real.KRW as EUR_KRW,
+        forex_real.ARS as EUR_ARS,
+        forex_real.BRL as EUR_BRL
 
       FROM `looker-datablocks.exchangerate.forex_real_full`  AS forex_real
-      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
     order by day desc)
@@ -157,7 +175,12 @@ UNION ALL
   select day, EUR_BYN as rate, "BYN" as currency from currency_table
 UNION ALL
   select day, EUR_COP as rate, "COP" as currency from currency_table
-
+UNION ALL
+  select day, EUR_KRW as rate, "KRW" as currency from currency_table
+UNION ALL
+  select day, EUR_ARS as rate, "ARS" as currency from currency_table
+UNION ALL
+  select day, EUR_BRL as rate, "BRL" as currency from currency_table
 
 
   order by day desc ;;
