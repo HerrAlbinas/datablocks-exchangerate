@@ -84,8 +84,8 @@ view: bq_forex_historical_real {
     Else x.EUR_COP End) as EUR_COP,
 (case when x.EUR_KRW is null then
     (case when lag(x.EUR_KRW, 1) over (order by x.day) is null then
-      lag(x.KRW, 2) over (order by x.day)
-      Else lag(x.KRW, 1) over (order by x.day) End)
+      lag(x.EUR_KRW, 2) over (order by x.day)
+      Else lag(x.EUR_KRW, 1) over (order by x.day) End)
     Else x.EUR_KRW End) as EUR_KRW,
 (case when x.EUR_ARS is null then
     (case when lag(x.EUR_ARS, 1) over (order by x.day) is null then
@@ -138,7 +138,7 @@ from
         forex_real.ARS as EUR_ARS,
         forex_real.BRL as EUR_BRL
 
-      FROM `looker-datablocks.exchangerate.forex_real_full`  AS forex_real
+      FROM `looker-datablocks.exchangerate.forex_real_full` AS forex_real
       Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
