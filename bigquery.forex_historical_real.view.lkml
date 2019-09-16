@@ -76,7 +76,7 @@ view: bq_forex_historical_real {
     (case when lag(x.EUR_BYN, 1) over (order by x.day) is null then
       lag(x.EUR_BYN, 2) over (order by x.day)
       Else lag(x.EUR_BYN, 1) over (order by x.day) End)
-    Else x.EUR_BYN End) as EUR_BYN
+    Else x.EUR_BYN End) as EUR_BYN,
 (case when x.EUR_COP is null then
     (case when lag(x.EUR_COP, 1) over (order by x.day) is null then
       lag(x.EUR_COP, 2) over (order by x.day)
@@ -154,7 +154,7 @@ UNION ALL
 UNION ALL
   select day, EUR_JPY as rate, "JPY" as currency from currency_table
 UNION ALL
-  select day, EUR_BYN as rate, "BYN" as currency from currency_table,
+  select day, EUR_BYN as rate, "BYN" as currency from currency_table
 UNION ALL
   select day, EUR_COP as rate, "COP" as currency from currency_table
 
