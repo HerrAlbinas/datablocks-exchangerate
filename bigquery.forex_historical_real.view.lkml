@@ -77,6 +77,11 @@ view: bq_forex_historical_real {
       lag(x.EUR_BYN, 2) over (order by x.day)
       Else lag(x.EUR_BYN, 1) over (order by x.day) End)
     Else x.EUR_BYN End) as EUR_BYN
+(case when x.EUR_COP is null then
+    (case when lag(x.EUR_COP, 1) over (order by x.day) is null then
+      lag(x.EUR_COP, 2) over (order by x.day)
+      Else lag(x.EUR_COP, 1) over (order by x.day) End)
+    Else x.EUR_COP End) as EUR_COP
 
 from
 (WITH
@@ -112,10 +117,11 @@ from
         forex_real.RUB as EUR_RUB,
         forex_real.PLN as EUR_PLN,
         forex_real.JPY as EUR_JPY,
-        forex_real.JPY as EUR_BYN
+        forex_real.BYN as EUR_BYN,
+        forex_real.COP as EUR_COP
 
       FROM `looker-datablocks.exchangerate.forex_real_full`  AS forex_real
-      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16, 17
+      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
     order by day desc)
@@ -148,11 +154,15 @@ UNION ALL
 UNION ALL
   select day, EUR_JPY as rate, "JPY" as currency from currency_table
 UNION ALL
-  select day, EUR_BYN as rate, "BYN" as currency from currency_table
+  select day, EUR_BYN as rate, "BYN" as currency from currency_table,
+UNION ALL
+  select day, EUR_COP as rate, "COP" as currency from currency_table
+
 
 
   order by day desc ;;
-    datagroup_trigger: 24hours
+
+  datagroup_trigger: 24hours
   }
 
   dimension_group: forex_exchange {
