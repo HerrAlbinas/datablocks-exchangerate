@@ -189,23 +189,23 @@ UNION ALL
   }
 
   dimension_group: forex_exchange {
+    label: "Date"
     type: time
     timeframes: [date, week, month, year]
     sql: ${TABLE}.day ;;
   }
 
   dimension: rate {
-    label: "ExchangeRate"
+    label: "Exchange Rate"
     description: "1 Euro = X units"
     value_format_name: decimal_4
     type:  number
     sql: ${TABLE}.rate ;;
-    hidden: yes
+    # hidden: yes
   }
 
   dimension: currency {
-    label: "CurrencyCode"
-    description: "Currency Code"
+    label: "Currency Code"
     type:  string
     sql: ${TABLE}.currency ;;
   }

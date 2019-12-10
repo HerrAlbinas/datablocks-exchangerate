@@ -12,36 +12,43 @@ view: bq_forex_real {
   }
 
   dimension: bgn {
+    label: "BGN"
     type: number
     sql: ${TABLE}.BGN ;;
   }
 
   dimension: brl {
+    label: "BRL"
     type: number
     sql: ${TABLE}.BRL ;;
   }
 
   dimension: cad {
+    label: "CAD"
     type: number
     sql: ${TABLE}.CAD ;;
   }
 
   dimension: chf {
+    label: "CHF"
     type: number
     sql: ${TABLE}.CHF ;;
   }
 
   dimension: cny {
+    label: "CNY"
     type: number
     sql: ${TABLE}.CNY ;;
   }
 
   dimension: czk {
+    label: "CZK"
     type: number
     sql: ${TABLE}.CZK ;;
   }
 
   dimension: dkk {
+    label: "DKK"
     type: number
     sql: ${TABLE}.DKK ;;
   }
@@ -62,11 +69,13 @@ view: bq_forex_real {
   }
 
   dimension: gbp {
+    label: "GBP"
     type: number
     sql: ${TABLE}.GBP ;;
   }
 
   dimension: hkd {
+    label: "HKD"
     type: number
     sql: ${TABLE}.HKD ;;
   }
@@ -97,6 +106,7 @@ view: bq_forex_real {
   }
 
   dimension: jpy {
+    label: "JPY"
     type: number
     sql: ${TABLE}.JPY ;;
   }
@@ -107,6 +117,7 @@ view: bq_forex_real {
   }
 
   dimension: mxn {
+    label: "MXN"
     type: number
     sql: ${TABLE}.MXN ;;
   }
@@ -117,11 +128,13 @@ view: bq_forex_real {
   }
 
   dimension: nok {
+    label: "NOK"
     type: number
     sql: ${TABLE}.NOK ;;
   }
 
   dimension: nzd {
+    label: "NZD"
     type: number
     sql: ${TABLE}.NZD ;;
   }
@@ -132,6 +145,7 @@ view: bq_forex_real {
   }
 
   dimension: pln {
+    label: "PLN"
     type: number
     sql: ${TABLE}.PLN ;;
   }
@@ -142,6 +156,7 @@ view: bq_forex_real {
   }
 
   dimension: rub {
+    label: "RUB"
     type: number
     sql: ${TABLE}.RUB ;;
   }
