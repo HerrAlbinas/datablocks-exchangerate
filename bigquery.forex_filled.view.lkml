@@ -34,6 +34,7 @@ view: bq_forex_filled {
       ON day = exchange_date
       order by exchange_date desc
        ;;
+    datagroup_trigger: 24hours
   }
 
   dimension: cny {
