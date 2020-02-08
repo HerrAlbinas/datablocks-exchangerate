@@ -101,7 +101,13 @@ view: bq_forex_historical_real {
     (case when lag(x.EUR_CNY, 1) over (order by x.day) is null then
       lag(x.EUR_CNY, 2) over (order by x.day)
       Else lag(x.EUR_CNY, 1) over (order by x.day) End)
-    Else x.EUR_CNY End) as EUR_CNY
+    Else x.EUR_CNY End) as EUR_CNY,
+(case when x.EUR_IDR is null then
+    (case when lag(x.EUR_IDR, 1) over (order by x.day) is null then
+      lag(x.EUR_IDR, 2) over (order by x.day)
+      Else lag(x.EUR_IDR, 1) over (order by x.day) End)
+    Else x.EUR_IDR End) as EUR_IDR
+
 
 from
 (WITH
@@ -142,10 +148,11 @@ from
         forex_real.KRW as EUR_KRW,
         forex_real.ARS as EUR_ARS,
         forex_real.BRL as EUR_BRL,
-        forex_real.CNY as EUR_CNY
+        forex_real.CNY as EUR_CNY,
+        forex_real.IDR as EUR_IDR
 
       FROM `looker-datablocks.exchangerate.forex_real_full` AS forex_real
-      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+      Group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
 ) as forex
     on forex.forex_exchange_date = calendar_day.day) as x
     order by day desc)
@@ -189,6 +196,8 @@ UNION ALL
   select day, EUR_BRL as rate, "BRL" as currency from currency_table
 UNION ALL
   select day, EUR_CNY as rate, "CNY" as currency from currency_table
+UNION ALL
+  select day, EUR_IDR as rate, "IDR" as currency from currency_table
 UNION ALL
   select day, 1 as rate, "EUR" as currency from currency_table
 
