@@ -102,6 +102,96 @@ view: bq_forex_historical_real {
       lag(x.EUR_CNY, 2) over (order by x.day)
       Else lag(x.EUR_CNY, 1) over (order by x.day) End)
     Else x.EUR_CNY End) as EUR_CNY,
+(case when x.EUR_INR is null then
+    (case when lag(x.EUR_INR, 1) over (order by x.day) is null then
+      lag(x.EUR_INR, 2) over (order by x.day)
+      Else lag(x.EUR_INR, 1) over (order by x.day) End)
+    Else x.EUR_INR End) as EUR_INR,
+(case when x.EUR_THB is null then
+    (case when lag(x.EUR_THB, 1) over (order by x.day) is null then
+      lag(x.EUR_THB, 2) over (order by x.day)
+      Else lag(x.EUR_THB, 1) over (order by x.day) End)
+    Else x.EUR_THB End) as EUR_THB,
+(case when x.EUR_PHP is null then
+    (case when lag(x.EUR_PHP, 1) over (order by x.day) is null then
+      lag(x.EUR_PHP, 2) over (order by x.day)
+      Else lag(x.EUR_PHP, 1) over (order by x.day) End)
+    Else x.EUR_PHP End) as EUR_PHP,
+(case when x.EUR_RSD is null then
+    (case when lag(x.EUR_RSD, 1) over (order by x.day) is null then
+      lag(x.EUR_RSD, 2) over (order by x.day)
+      Else lag(x.EUR_RSD, 1) over (order by x.day) End)
+    Else x.EUR_RSD End) as EUR_RSD,
+(case when x.EUR_NGN is null then
+    (case when lag(x.EUR_NGN, 1) over (order by x.day) is null then
+      lag(x.EUR_NGN, 2) over (order by x.day)
+      Else lag(x.EUR_NGN, 1) over (order by x.day) End)
+    Else x.EUR_NGN End) as EUR_NGN,
+(case when x.EUR_CRC is null then
+    (case when lag(x.EUR_CRC, 1) over (order by x.day) is null then
+      lag(x.EUR_CRC, 2) over (order by x.day)
+      Else lag(x.EUR_CRC, 1) over (order by x.day) End)
+    Else x.EUR_CRC End) as EUR_CRC,
+(case when x.EUR_TWD is null then
+    (case when lag(x.EUR_TWD, 1) over (order by x.day) is null then
+      lag(x.EUR_TWD, 2) over (order by x.day)
+      Else lag(x.EUR_TWD, 1) over (order by x.day) End)
+    Else x.EUR_TWD End) as EUR_TWD,
+(case when x.EUR_CHF is null then
+    (case when lag(x.EUR_CHF, 1) over (order by x.day) is null then
+      lag(x.EUR_CHF, 2) over (order by x.day)
+      Else lag(x.EUR_CHF, 1) over (order by x.day) End)
+    Else x.EUR_CHF End) as EUR_CHF,
+(case when x.EUR_QAR is null then
+    (case when lag(x.EUR_QAR, 1) over (order by x.day) is null then
+      lag(x.EUR_QAR, 2) over (order by x.day)
+      Else lag(x.EUR_QAR, 1) over (order by x.day) End)
+    Else x.EUR_QAR End) as EUR_QAR,
+(case when x.EUR_CLP is null then
+    (case when lag(x.EUR_CLP, 1) over (order by x.day) is null then
+      lag(x.EUR_CLP, 2) over (order by x.day)
+      Else lag(x.EUR_CLP, 1) over (order by x.day) End)
+    Else x.EUR_CLP End) as EUR_CLP,
+(case when x.EUR_LBP is null then
+    (case when lag(x.EUR_LBP, 1) over (order by x.day) is null then
+      lag(x.EUR_LBP, 2) over (order by x.day)
+      Else lag(x.EUR_LBP, 1) over (order by x.day) End)
+    Else x.EUR_LBP End) as EUR_LBP,
+(case when x.EUR_ZAR is null then
+    (case when lag(x.EUR_ZAR, 1) over (order by x.day) is null then
+      lag(x.EUR_ZAR, 2) over (order by x.day)
+      Else lag(x.EUR_ZAR, 1) over (order by x.day) End)
+    Else x.EUR_ZAR End) as EUR_ZAR,
+(case when x.EUR_SGD is null then
+    (case when lag(x.EUR_SGD, 1) over (order by x.day) is null then
+      lag(x.EUR_SGD, 2) over (order by x.day)
+      Else lag(x.EUR_SGD, 1) over (order by x.day) End)
+    Else x.EUR_SGD End) as EUR_SGD,
+(case when x.EUR_SAR is null then
+    (case when lag(x.EUR_SAR, 1) over (order by x.day) is null then
+      lag(x.EUR_SAR, 2) over (order by x.day)
+      Else lag(x.EUR_SAR, 1) over (order by x.day) End)
+    Else x.EUR_SAR End) as EUR_SAR,
+(case when x.EUR_AED is null then
+    (case when lag(x.EUR_AED, 1) over (order by x.day) is null then
+      lag(x.EUR_AED, 2) over (order by x.day)
+      Else lag(x.EUR_AED, 1) over (order by x.day) End)
+    Else x.EUR_AED End) as EUR_AED,
+(case when x.EUR_TRY is null then
+    (case when lag(x.EUR_TRY, 1) over (order by x.day) is null then
+      lag(x.EUR_TRY, 2) over (order by x.day)
+      Else lag(x.EUR_TRY, 1) over (order by x.day) End)
+    Else x.EUR_TRY End) as EUR_TRY,
+(case when x.EUR_RON is null then
+    (case when lag(x.EUR_RON, 1) over (order by x.day) is null then
+      lag(x.EUR_RON, 2) over (order by x.day)
+      Else lag(x.EUR_RON, 1) over (order by x.day) End)
+    Else x.EUR_RON End) as EUR_RON,
+(case when x.EUR_HKD is null then
+    (case when lag(x.EUR_HKD, 1) over (order by x.day) is null then
+      lag(x.EUR_HKD, 2) over (order by x.day)
+      Else lag(x.EUR_HKD, 1) over (order by x.day) End)
+    Else x.EUR_HKD End) as EUR_HKD,
 (case when x.EUR_IDR is null then
     (case when lag(x.EUR_IDR, 1) over (order by x.day) is null then
       lag(x.EUR_IDR, 2) over (order by x.day)
@@ -149,6 +239,29 @@ from
         forex_real.ARS as EUR_ARS,
         forex_real.BRL as EUR_BRL,
         forex_real.CNY as EUR_CNY,
+        forex_real.INR AS EUR_INR,
+        forex_real.THB AS EUR_THB,
+        forex_real.PHP AS EUR_PHP,
+        forex_real.RSD AS EUR_RSD,
+        forex_real.RSD AS EUR_NGN,
+        forex_real.RSD AS EUR_CRC,
+        forex_real.RSD AS EUR_TWD,
+        forex_real.RSD AS EUR_CHF,
+        forex_real.RSD AS EUR_HKD,
+        forex_real.RSD AS EUR_QAR,
+        forex_real.RSD AS EUR_CLP,
+        forex_real.RSD AS EUR_LBP,
+        forex_real.RSD AS EUR_ZAR,
+        forex_real.RSD AS EUR_SGD,
+        forex_real.RSD AS EUR_SAR,
+        forex_real.RSD AS EUR_AED,
+        forex_real.RSD AS EUR_TRY,
+        forex_real.RSD AS EUR_RON,
+        forex_real.RSD AS EUR_MYR,
+        forex_real.RSD AS EUR_EGP,
+        forex_real.RSD AS EUR_ILS,
+        forex_real.RSD AS EUR_PEN,
+        forex_real.RSD AS EUR_NGN,
         forex_real.IDR as EUR_IDR
 
       FROM `looker-datablocks.exchangerate.forex_real_full` AS forex_real
@@ -196,6 +309,50 @@ UNION ALL
   select day, EUR_BRL as rate, "BRL" as currency from currency_table
 UNION ALL
   select day, EUR_CNY as rate, "CNY" as currency from currency_table
+UNION ALL
+  select day, EUR_INR as rate, "INR" as currency from currency_table
+UNION ALL
+  select day, EUR_THB as rate, "THB" as currency from currency_table
+UNION ALL
+  select day, EUR_PHP as rate, "PHP" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "RSD" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "NGN" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "CRC" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "TWD" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "CHF" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "HKD" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "QAR" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "CLP" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "LBP" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "ZAR" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "SGD" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "SAR" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "AED" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "TRY" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "RON" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "MYR" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "EGP" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "ILS" as currency from currency_table
+UNION ALL
+  select day, EUR_RSD as rate, "PEN" as currency from currency_table
 UNION ALL
   select day, EUR_IDR as rate, "IDR" as currency from currency_table
 UNION ALL
