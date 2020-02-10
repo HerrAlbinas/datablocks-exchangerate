@@ -4,7 +4,7 @@ include: "bigquery.explore"
 
 datagroup: 24hours {
   max_cache_age: "24 hours"
-  sql_trigger: SELECT CURRENT_DATETIME();;
+  sql_trigger: SELECT CURRENT_DATE();;
 }
 
 persist_with: 24hours
